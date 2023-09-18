@@ -1,0 +1,11 @@
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceCommon\bin\Debug\net6.0\SelfFinanceCommon.deps.json
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceCommon\bin\Debug\net6.0\SelfFinanceCommon.dll
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceCommon\bin\Debug\net6.0\SelfFinanceCommon.pdb
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceCommon\obj\Debug\net6.0\SelfFinanceCommon.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceCommon\obj\Debug\net6.0\SelfFinanceCommon.AssemblyInfoInputs.cache
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceCommon\obj\Debug\net6.0\SelfFinanceCommon.AssemblyInfo.cs
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceCommon\obj\Debug\net6.0\SelfFinanceCommon.csproj.CoreCompileInputs.cache
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceCommon\obj\Debug\net6.0\SelfFinanceCommon.dll
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceCommon\obj\Debug\net6.0\refint\SelfFinanceCommon.dll
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceCommon\obj\Debug\net6.0\SelfFinanceCommon.pdb
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceCommon\obj\Debug\net6.0\ref\SelfFinanceCommon.dll

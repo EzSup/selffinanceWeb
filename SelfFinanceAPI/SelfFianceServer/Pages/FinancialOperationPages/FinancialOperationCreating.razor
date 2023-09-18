@@ -1,0 +1,75 @@
+﻿@page "/finoperationcreating"
+@using System.ComponentModel.DataAnnotations
+@using System.Text.Json.Serialization
+@using System.Text.Json
+@using System.Text
+@using SelfFinanceCommon.Dtos;
+@using SelfFinanceCommon.Dtos.ForCreate;
+@using SelfFianceServer.Services.Interfaces
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+@inject IFinancialOperationService FinancialOperationDtoService
+@inject IExpenseTypeService ExpenseTypeDtoService
+@inject ICommonService CommonService
+
+<div style="justify-content: center; display: flex; margin-top: 50px; ">
+    <EditForm Model="@_itemToCreate" OnValidSubmit="OnValidSubmit" style = "width: 550px;">
+        <DataAnnotationsValidator />
+        <MudGrid>
+            <MudItem xs="12" sm="7">
+                <MudCard>
+                    <MudCardContent>
+                        <MudText Style="font-weight: bolder"><MudIcon Icon="@Icons.Material.Outlined.CreateNewFolder"/>  Creating financial operation form</MudText>
+                        <MudSelect T="ExpenseTypeDto" Label="Expense type" Variant="Variant.Filled" AnchorOrigin="Origin.BottomCenter" @bind-SelectedValues="_selectedExpensetype">
+                            @foreach(var expType in _expenseTypes)
+                            {
+                                <MudSelectItem Value="expType" />
+                            }
+                        </MudSelect>
+                        <MudNumericField T = "decimal" Label="Amount" HelperText=""
+                        @bind-Value="_itemToCreate.Amount" For="@(() => _itemToCreate.Amount)" />
+                        <MudTextField Label="Description" HelperText="Enter the description"
+                        @bind-Value="_itemToCreate.Description" For="@(() => _itemToCreate.Description)" />
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="Confirm" Style="margin-left:auto; margin-right:auto;">Confirm</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
+    </EditForm>
+</div>
+@code {
+    FinancialOperationForCreateDto _itemToCreate = new FinancialOperationForCreateDto();
+    private IEnumerable<ExpenseTypeDto> _expenseTypes = new List<ExpenseTypeDto>();
+    private IEnumerable<ExpenseTypeDto> _selectedExpensetype = new List<ExpenseTypeDto>();
+
+    private async void OnValidSubmit(EditContext context)
+    {
+        StateHasChanged();
+    }
+
+    private async Task RefreshExpenseTypesList()
+    {
+        _expenseTypes = await ExpenseTypeDtoService.GetExpenseTypesArrayFromApi();
+    }
+
+    private void SetItemToCreateData()
+    {
+        _itemToCreate.DateTime = DateTime.Now;
+        _itemToCreate.TypeId = _selectedExpensetype.First().Id;
+    }
+
+    private async void Confirm()
+    {
+        SetItemToCreateData();
+        await FinancialOperationDtoService.CreateFinancialOperation(_itemToCreate);
+        NavigationManager.NavigateTo("/finoperationsmanaging");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await this.RefreshExpenseTypesList();
+    }
+
+}

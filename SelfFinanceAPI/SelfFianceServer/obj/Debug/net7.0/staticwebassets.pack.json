@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\opana\\source\\repos\\task-12-dotnet-backend-webapi\\SelfFinanceAPI\\SelfFianceServer\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\SelfFianceServer.bundle.scp.css",
+      "PackagePath": "staticwebassets\\SelfFianceServer.bundle.scp.css"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.SelfFianceServer.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.SelfFianceServer.props",
+      "PackagePath": "build\\SelfFianceServer.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.SelfFianceServer.props",
+      "PackagePath": "buildMultiTargeting\\SelfFianceServer.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.SelfFianceServer.props",
+      "PackagePath": "buildTransitive\\SelfFianceServer.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

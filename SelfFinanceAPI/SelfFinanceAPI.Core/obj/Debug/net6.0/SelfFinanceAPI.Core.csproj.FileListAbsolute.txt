@@ -1,0 +1,17 @@
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\bin\Debug\net6.0\SelfFinanceAPI.Core.deps.json
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\bin\Debug\net6.0\SelfFinanceAPI.Core.runtimeconfig.json
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\bin\Debug\net6.0\SelfFinanceAPI.Core.dll
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\bin\Debug\net6.0\SelfFinanceAPI.Core.pdb
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\bin\Debug\net6.0\SelfFinanceCommon.dll
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\bin\Debug\net6.0\SelfFinanceCommon.pdb
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\obj\Debug\net6.0\SelfFinanceAPI.Core.csproj.AssemblyReference.cache
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\obj\Debug\net6.0\SelfFinanceAPI.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\obj\Debug\net6.0\SelfFinanceAPI.Core.AssemblyInfoInputs.cache
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\obj\Debug\net6.0\SelfFinanceAPI.Core.AssemblyInfo.cs
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\obj\Debug\net6.0\SelfFinanceAPI.Core.csproj.CoreCompileInputs.cache
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\obj\Debug\net6.0\SelfFinanceAPI.Core.csproj.CopyComplete
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\obj\Debug\net6.0\SelfFinanceAPI.Core.dll
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\obj\Debug\net6.0\refint\SelfFinanceAPI.Core.dll
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\obj\Debug\net6.0\SelfFinanceAPI.Core.pdb
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\obj\Debug\net6.0\SelfFinanceAPI.Core.genruntimeconfig.cache
+C:\Users\opana\source\repos\task-12-dotnet-backend-webapi\SelfFinanceAPI\SelfFinanceAPI.Core\obj\Debug\net6.0\ref\SelfFinanceAPI.Core.dll

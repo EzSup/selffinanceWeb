@@ -1,0 +1,49 @@
+﻿@page "/exptypecreating"
+@using System.ComponentModel.DataAnnotations
+@using System.Text.Json.Serialization
+@using System.Text.Json
+@using System.Text
+@using SelfFinanceCommon.Dtos;
+@using SelfFinanceCommon.Dtos.ForCreate;
+@using SelfFianceServer.Services.Interfaces;
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+@inject IExpenseTypeService ExpenseTypeDtoService
+@inject ICommonService CommonService
+
+<div style="justify-content: center; display: flex; margin-top: 50px; ">
+    <EditForm Model="@_itemToCreate" OnValidSubmit="OnValidSubmit" style = "width: 550px;">
+        <DataAnnotationsValidator />
+        <MudGrid>
+            <MudItem xs="12" sm="7">
+                <MudCard>
+                    <MudCardContent>
+                        <MudText Style="font-weight: bolder"><MudIcon Icon="@Icons.Material.Outlined.CreateNewFolder"/>  Creating expense type form</MudText>
+                        <MudTextField Label="Name" HelperText="Enter an expense type name"
+                        @bind-Value="_itemToCreate.Name" For="@(() => _itemToCreate.Name)" />
+                        <MudSwitch Label="Is income" @bind-Checked="_itemToCreate.IsIncome"  
+                        For="@(() => _itemToCreate.IsIncome)" Color="Color.Success" UnCheckedColor="Color.Error" />
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="Confirm" Style="margin-left:auto; margin-right:auto;">Confirm</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
+    </EditForm>
+</div>
+@code {
+    ExpenseTypeForCreateDto _itemToCreate = new ExpenseTypeForCreateDto();
+
+    private async void OnValidSubmit(EditContext context)
+    {
+        StateHasChanged();        
+    }
+
+    private async void Confirm()
+    {
+        await ExpenseTypeDtoService.CreateExpenseType(_itemToCreate);
+        NavigationManager.NavigateTo("/exptypesmanaging");
+    }
+
+}

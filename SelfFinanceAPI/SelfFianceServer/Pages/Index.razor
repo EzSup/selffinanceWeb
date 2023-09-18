@@ -1,0 +1,192 @@
+﻿@page "/"
+@using System.Text.Json.Serialization
+@using System.Text.Json
+@using System.Net.Http.Json
+@using System.Text
+@using SelfFinanceCommon.Dtos;
+@using SelfFinanceCommon.Dtos.ForCreate;
+@using SelfFianceServer.Services.Interfaces
+@using SelfFianceServer.Services
+@inject ISnackbar Snackbar
+@inject IExpenseTypeService ExpenseTypeDtoService
+@inject IReportService ReportDtoService
+
+<MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
+    <MudGrid>
+        <MudItem xs="12" sm="6" md="6">
+            <MudPaper Elevation="2" Class="pa-4" Style="height: 800px;">
+                <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6" style="margin-left:auto; margin-right: auto; margin-top:10px;">
+                    <MudTabPanel Text="Today" @onclick = "GetReportByDay">
+                        <MudText Typo="Typo.h3">Report</MudText>
+                        <br />
+                        <MudDivider />
+                        <div style="display: flex; align-items: center;">
+                            <MudDatePicker Label="Date Format" @bind-Date="_dateTime" DateFormat="dd.MM.yyyy" style="width: 200px;" />
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="GetReportByDay" style="width: 150px; margin-right: 10px;">Accept</MudButton>
+                        </div>
+                        <MudTabs>
+                            <MudTabPanel Text="Expenses">
+                                <MudPaper Class="pa-4">
+                                    <MudChart ChartType="ChartType.Donut" InputData="@_spends.ToArray()" InputLabels="@_spendsLabels.ToArray()" Style="max-width:400px; margin-left: auto; margin-right:auto;">
+                                        <CustomGraphics>
+                                            <text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">Total</text>
+                                            <text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@_spends.Sum().ToString("N0") ₴</text>
+                                        </CustomGraphics>
+                                    </MudChart>
+                                </MudPaper>
+                            </MudTabPanel>
+
+                            <MudTabPanel Text="Incomes">
+                                <MudPaper Class="pa-4">
+                                    <MudChart ChartType="ChartType.Donut" InputData="@_incomes.ToArray()" InputLabels="@_incomesLabels.ToArray()" Style="max-width:400px; margin-left: auto; margin-right:auto;">
+                                        <CustomGraphics>
+                                            <text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">Total</text>
+                                            <text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@_incomes.Sum().ToString("N0") ₴</text>
+                                        </CustomGraphics>
+                                    </MudChart>
+                                </MudPaper>
+                            </MudTabPanel>
+                        </MudTabs>
+                        <MudText Typo="Typo.subtitle1"><b>Total incomes: </b>@_report.totalIncome</MudText>
+                        <MudText Typo="Typo.subtitle1"><b>Total expenses: </b>@_report.totalExpenses</MudText>
+                    </MudTabPanel>
+                    <MudTabPanel Text="This week" @onclick="GetReportByPeriodOfTime">
+                        <MudText Typo="Typo.h3">Report</MudText>
+                        <br />
+                        <MudDivider />
+                        <div style="display: flex; align-items: center;">
+                            <MudDatePicker Label="Date Format" @bind-Date="_startDateTime" DateFormat="dd.MM.yyyy" style="width: 200px;" />
+                            <MudDatePicker Label="Date Format" @bind-Date="_endDateTime" DateFormat="dd.MM.yyyy" style="width: 200px;" />
+                            <br />
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="GetReportByPeriodOfTime" style="width: 150px;">Accept</MudButton>
+                        </div>
+                        <MudTabs>
+                            <MudTabPanel Text="Expenses">
+                                <MudPaper Class="pa-4">
+                                    <MudChart ChartType="ChartType.Donut" InputData="@_spends.ToArray()" InputLabels="@_spendsLabels.ToArray()" Style="max-width:400px; margin-left: auto; margin-right:auto;">
+                                        <CustomGraphics>
+                                            <text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">Total</text>
+                                            <text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@_spends.Sum().ToString("N0") ₴</text>
+                                        </CustomGraphics>
+                                    </MudChart>
+                                </MudPaper>
+                            </MudTabPanel>
+
+                            <MudTabPanel Text="Incomes">
+                                <MudPaper Class="pa-4">
+                                    <MudChart ChartType="ChartType.Donut" InputData="@_incomes.ToArray()" InputLabels="@_incomesLabels.ToArray()" Style="max-width:400px; margin-left: auto; margin-right:auto;">
+                                        <CustomGraphics>
+                                            <text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">Total</text>
+                                            <text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@_incomes.Sum().ToString("N0") ₴</text>
+                                        </CustomGraphics>
+                                    </MudChart>
+                                </MudPaper>
+                            </MudTabPanel>
+                        </MudTabs>
+                        <MudText Typo="Typo.subtitle1">Total incomes: @_report.totalIncome</MudText>
+                        <MudText Typo="Typo.subtitle1">Total expenses: @_report.totalExpenses</MudText>
+                    </MudTabPanel>
+                </MudTabs>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="6">
+            <MudPaper Elevation="2" Class="pa-4" Style="height: 800px;">
+                <MudTable T="FinancialOperationDto" Items="@_report.operations" Hover="true" Filter="new Func<FinancialOperationDto,bool>(FilterFunc1)">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">FinancialOperations</MudText>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Id</MudTh>
+                        <MudTh>Type</MudTh>
+                        <MudTh>Amount</MudTh>
+                        <MudTh>Date and time</MudTh>
+                        <MudTh>Description</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Id">@context.Id</MudTd>
+                        <MudTd DataLabel="Type">@_expenseTypes.FirstOrDefault(x => x.Id == context.TypeId)?.Name</MudTd>
+                        <MudTd DataLabel="Amount">@context.Amount</MudTd>
+                        <MudTd DataLabel="Date and time">@context.DateTime</MudTd>
+                        <MudTd DataLabel="Description">@context.Description</MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager PageSizeOptions="new int[]{50, 100}" />
+                    </PagerContent>
+                </MudTable>
+            </MudPaper>
+        </MudItem>        
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private List<double> _spends = new List<double>() { 0.0 };
+    private List<string> _spendsLabels = new List<string>() { "nothing"};
+    private double _totalExpenses;
+    private List<double> _incomes =  new List<double>() { 0.0 };
+    private List<string> _incomesLabels = new List<string>() { "nothing" };
+    private double _totalIncomes;
+    private DateTime? _dateTime;
+    private DateTime? _startDateTime;
+    private DateTime? _endDateTime;
+    private ReportDto _report = new();
+    private IEnumerable<ExpenseTypeDto>? _expenseTypes = new List<ExpenseTypeDto>();
+    private string _searchString = "";
+
+    private bool FilterFunc1(FinancialOperationDto element) => FilterFunc(element, _searchString);
+
+    private bool FilterFunc(FinancialOperationDto element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.Description.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.Amount.ToString().Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (_expenseTypes.FirstOrDefault(x => x.Id == element.TypeId).Name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        return false;
+    }
+
+    private void SetDatesToDefault()
+    {
+        _dateTime = DateTime.Now;
+        _startDateTime = DateTime.Now.Date.AddDays(-(int)DateTime.Now.DayOfWeek); ;
+        _endDateTime = DateTime.Now; 
+    }
+
+    private async Task RefreshExpenseTypesList()
+    {
+        _expenseTypes = await ExpenseTypeDtoService.GetExpenseTypesArrayFromApi();
+    }
+
+    private async Task GetReportByDay()
+    {
+        await RefreshExpenseTypesList();
+        _report = await ReportDtoService.GetReportByDayFromApi((DateTime)_dateTime);
+        LoadExpensesAndIncomes();
+    }
+
+    private async Task GetReportByPeriodOfTime()
+    {
+        await RefreshExpenseTypesList();
+        _report = await ReportDtoService.GetReportByPeriodOfTimeFromApi((DateTime)_startDateTime, (DateTime)_endDateTime);
+        LoadExpensesAndIncomes();
+    }
+
+    private void LoadExpensesAndIncomes()
+    {
+        _spendsLabels = ExpenseTypeDtoService.GetSpendsOrIncomesLabelsFromReport(_report, _expenseTypes.ToArray(), false);
+        _spends = ExpenseTypeDtoService.GetSpendsOrIncomesListFromReport(_report, _expenseTypes.ToArray(), false);
+
+        _incomesLabels = ExpenseTypeDtoService.GetSpendsOrIncomesLabelsFromReport(_report, _expenseTypes.ToArray(), true);
+        _incomes = ExpenseTypeDtoService.GetSpendsOrIncomesListFromReport(_report, _expenseTypes.ToArray(), true);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        SetDatesToDefault();
+        await this.GetReportByDay();
+    }
+}
